@@ -66,7 +66,8 @@ def openai_fetch_summary(input_text, api_key):
             }
         ],
         model="gpt-4o",
-        max_tokens=16383
+        max_tokens=16383,
+        temperature=1
     )
 
     return response.choices[0].message.content
