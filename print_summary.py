@@ -2,7 +2,6 @@ import glob
 import re
 import subprocess
 
-import ollama
 from openai import OpenAI
 
 
