@@ -23,7 +23,7 @@ def download_transcript(video_url):
     if vtt_files:
         return vtt_files[0]
     else:
-        raise FileNotFoundError("Nie odnaleziono pliku z transkrypcją.")
+        raise FileNotFoundError("File with transcription not found")
 
 
 def clean_transcript(file_name):
