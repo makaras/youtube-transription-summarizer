@@ -24,10 +24,6 @@ To use this script, ensure the following dependencies and tools are installed:
   ```bash
   pip install openai
 
-Oto README w języku angielskim do podanego kodu:
-
-markdown
-Copy code
 # YouTube Transcript Summarizer
 
 This Python script allows you to download, clean, and summarize transcripts from YouTube videos. It leverages `yt-dlp` for downloading subtitles, Python's `re` library for cleaning text, and OpenAI's API for generating detailed summaries.
