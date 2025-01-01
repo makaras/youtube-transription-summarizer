@@ -24,7 +24,6 @@ To use this script, ensure the following dependencies and tools are installed:
   ```bash
   pip install openai
 
-
 Oto README w języku angielskim do podanego kodu:
 
 markdown
