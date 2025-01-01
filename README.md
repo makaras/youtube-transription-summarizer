@@ -30,7 +30,7 @@ To use this script, ensure the following dependencies and tools are installed:
 - Run the Script: Execute the script with:
 
     ```bash
-    python3 print_summary.py
+    python3 save_summary_to_file.py
 
 - Provide Video URL: Update the video_url variable in the main() function with the URL of the YouTube video.
 
