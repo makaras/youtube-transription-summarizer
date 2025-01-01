@@ -22,7 +22,7 @@ To use this script, ensure the following dependencies and tools are installed:
 ### Python Dependencies
 - Install required Python packages:
   ```bash
-  pip install openai
+  pip3 install openai
 
 # YouTube Transcript Summarizer
 
