@@ -6,19 +6,19 @@ from openai import OpenAI
 
 
 def download_transcript(video_url):
-    # Użycie yt-dlp za pomocą subprocess
+    # Use yt-dlp with subprocess
     command = [
         "yt-dlp",
         "--write-auto-sub",
         "--skip-download",
         "--sub-format", "vtt",
         "--sub-lang", "pl",
-        "-o", "%(title)s.%(ext)s",  # Tytuł zostanie użyty jako nazwa pliku
+        "-o", "%(title)s.%(ext)s",  # Video title will be used as filename
         video_url
     ]
     subprocess.run(command)
 
-    # Pobranie nazwy pliku VTT; zakładam, że jest jeden plik o rozszerzeniu .vtt
+    # Fetch VTT filename
     vtt_files = glob.glob("*.vtt")
     if vtt_files:
         return vtt_files[0]
@@ -27,21 +27,21 @@ def download_transcript(video_url):
 
 
 def clean_transcript(file_name):
-    # Czytanie zawartości pliku
+    # Read file content
     with open(file_name, 'r', encoding='utf-8') as file:
         content = file.read()
 
-    # Usuwanie tagów używając regex
+    # Delete tags
     content = re.sub(r'<[^>]+>', '', content)
 
-    # Usuwanie znaczników czasu
+    # Delete timestamps
     content = re.sub(r"\d{2}:\d{2}:\d{2}\.\d{3} --> \d{2}:\d{2}:\d{2}\.\d{3}.*\n", '', content)
 
-    # Usuwanie duplikatów linii
+    # Delete duplicates
     lines = content.split('\n')
     unique_lines = list(dict.fromkeys(lines))
 
-    # Zapisanie do pliku bez duplikatów i tagów
+    # Save to file without duplicates and tags
     clean_file_name = file_name.replace('.vtt', '_clean.txt')
     with open(clean_file_name, 'w', encoding='utf-8') as file:
         file.write('\n'.join(unique_lines))
@@ -77,7 +77,7 @@ def main():
     api_key = "PASTE_OPENAI_KEY_HERE"
 
     transcript_file = download_transcript(video_url)
-    print(f"Pobrano transkrypcję do pliku: {transcript_file}")
+    print(f"Fetched transcription to file: {transcript_file}")
 
     clean_file = clean_transcript(transcript_file)
 
@@ -85,9 +85,9 @@ def main():
         text = file.read()
 
     openai_summary = openai_fetch_summary(text, api_key)
-    print("Streszczenie OpenAI:", openai_summary)
+    print("Summary by OpenAI:", openai_summary)
 
-    # Zapisanie summary do pliku
+    # Save summary to file
     openai_summary_file_name = transcript_file.replace('.vtt', '_openai_summary.txt')
     with open(openai_summary_file_name, 'w', encoding='utf-8') as file:
         file.write(openai_summary)
