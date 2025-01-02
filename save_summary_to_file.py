@@ -1,8 +1,33 @@
 import glob
+import os
 import re
+import shutil
 import subprocess
 
 from openai import OpenAI
+
+
+def move_vtt_and_txt_files_if_exist():
+    # Use the current working directory as the source folder
+    source_folder = os.getcwd()
+
+    # Path to the 'archive' folder
+    archive_folder = os.path.join(source_folder, "archive")
+
+    # Create the 'archive' folder if it does not exist
+    if not os.path.exists(archive_folder):
+        os.makedirs(archive_folder)
+
+    # Iterate through the files in the source folder
+    for file_name in os.listdir(source_folder):
+        # Full path to the file
+        file_path = os.path.join(source_folder, file_name)
+
+        # Check if the file is a .vtt or .txt file
+        if os.path.isfile(file_path) and file_name.endswith(('.vtt', '.txt')):
+            # Move the file to the 'archive' folder
+            shutil.move(file_path, archive_folder)
+            print(f"Moved: {file_name}")
 
 
 def download_transcript(video_url):
@@ -76,6 +101,8 @@ def openai_fetch_summary(input_text, api_key):
 def main():
     video_url = "PASTE_URL_HERE"
     api_key = "PASTE_OPENAI_KEY_HERE"
+
+    move_vtt_and_txt_files_if_exist()
 
     transcript_file = download_transcript(video_url)
     print(f"Fetched transcription to file: {transcript_file}")

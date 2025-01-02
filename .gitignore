@@ -1,1 +1,9 @@
 *.iml
+
+*.vtt
+*_clean.txt
+*_summary.txt
+
+archive/*.vtt
+archive/*_clean.txt
+archive/*_summary.txt
