@@ -25,7 +25,7 @@ To use this script, ensure the following dependencies and tools are installed:
   pip3 install openai
 
 ### Usage
-- Setup OpenAI API Key: Replace api_key in the main() function with your OpenAI API key.
+- Setup OpenAI API Key: Once you obtain your OpenAI API key, set it in the `config.py` file under the appropriate property. An example configuration is provided in the `config-example.py` file.
 
 - Run the Script: Execute the script with:
 
@@ -42,7 +42,6 @@ To use this script, ensure the following dependencies and tools are installed:
 ### Notes
 - Ensure the video has auto-generated subtitles in Polish (pl) or adjust the --sub-lang flag in the download_transcript function to match your preferred language.
 - The OpenAI API key must be valid, and your account should have access to GPT-4 for optimal performance.
-- Set OpenAI API key to `config.py` file
 - Large transcripts might exceed the token limit of GPT-4; consider summarizing them in smaller sections.
 
 ### Disclaimer
