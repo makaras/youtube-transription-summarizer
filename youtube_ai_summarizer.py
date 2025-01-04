@@ -3,6 +3,7 @@ import os
 import re
 import shutil
 import subprocess
+import config
 
 from openai import OpenAI
 
@@ -74,9 +75,9 @@ def clean_transcript(file_name):
     return clean_file_name
 
 
-def openai_fetch_summary(input_text, api_key):
+def openai_fetch_summary(input_text, openai_api_key):
     client = OpenAI(
-        api_key=api_key
+        api_key=openai_api_key
     )
 
     response = client.chat.completions.create(
@@ -99,8 +100,8 @@ def openai_fetch_summary(input_text, api_key):
 
 
 def main():
-    video_url = "PASTE_URL_HERE"
-    api_key = "PASTE_OPENAI_KEY_HERE"
+    video_url = input("Please enter youtube video URL to summarize: ")
+    openai_api_key = config.OPENAI_API_KEY
 
     move_vtt_and_txt_files_if_exist()
 
@@ -112,7 +113,7 @@ def main():
     with open(clean_file, 'r', encoding='utf-8') as file:
         text = file.read()
 
-    openai_summary = openai_fetch_summary(text, api_key)
+    openai_summary = openai_fetch_summary(text, openai_api_key)
     print("Summary by OpenAI:", openai_summary)
 
     # Save summary to file

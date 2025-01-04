@@ -7,3 +7,5 @@
 archive/*.vtt
 archive/*_clean.txt
 archive/*_summary.txt
+
+config.py
