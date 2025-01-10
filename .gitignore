@@ -9,3 +9,5 @@ archive/*_clean.txt
 archive/*_summary.txt
 
 config.py
+
+.DS_Store
